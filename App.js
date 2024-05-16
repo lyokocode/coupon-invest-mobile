@@ -1,12 +1,13 @@
-import { StatusBar } from 'expo-status-bar';
-import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import Screens from "./src/Screens"
+import { SafeAreaView } from 'react-native';
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Screens />
+      <SafeAreaView style={{ flex: 1 }}>
+        <Screens />
+      </SafeAreaView>
     </NavigationContainer>
   );
 }
