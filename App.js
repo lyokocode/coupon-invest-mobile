@@ -1,12 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import { Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import Screens from "./src/Screens"
 
 export default function App() {
   return (
-    <View className="flex-1 items-center justify-center ">
-      <Text className="text-xl ">Hello Aelita!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Screens />
+    </NavigationContainer>
   );
 }
 
