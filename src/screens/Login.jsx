@@ -2,6 +2,7 @@ import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
 import { useDispatch } from "react-redux";
 import { setAuth } from '../store/authSlice';
 import { useNavigation } from '@react-navigation/native';
+import { Formik } from 'formik';
 
 export const Login = () => {
     const dispatch = useDispatch()
@@ -25,19 +26,40 @@ export const Login = () => {
                 </View>
                 {/* form input */}
                 <View className="w-2/3 space-y-4">
-                    <TextInput
-                        placeholder='email'
-                        className="bg-white w-full pl-4 py-3 rounded-xl"
-                    />
-                    <TextInput
-                        placeholder='password'
-                        className="bg-white w-full pl-4 py-3 rounded-xl"
-                        secureTextEntry={true}
-                    />
+                    <Formik
+                        initialValues={{ email: '', password: '' }}
+                        onSubmit={values => console.log(values)}
+                    >
+                        {({ handleChange, handleBlur, handleSubmit, values }) => (
+                            <View className="flex gap-2">
+                                <TextInput
+                                    placeholder='email'
+                                    className="bg-white w-full pl-4 py-3 rounded-xl"
+                                    onChangeText={handleChange('email')}
+                                    onBlur={handleBlur('email')}
+                                    value={values.email}
+                                />
+                                <TextInput
+                                    placeholder='password'
+                                    className="bg-white w-full pl-4 py-3 rounded-xl"
+                                    secureTextEntry={true}
+                                    onChangeText={handleChange('password')}
+                                    onBlur={handleBlur('password')}
+                                />
+
+                                {/* <TouchableOpacity
+                                    onPress={handleSubmit}
+                                    className="bg-[#7c3aed] w-full py-3 rounded-xl"
+                                >
+                                    <Text className="text-center text-lg text-white font-semibold">Giriş Yap</Text>
+                                </TouchableOpacity> */}
+
+                            </View>
+                        )}
+                    </Formik>
                 </View>
 
                 {/* button container */}
-
                 <TouchableOpacity
                     onPress={() => dispatch(setAuth())}
                     className="bg-[#7c3aed] w-1/2  py-3 rounded-xl"
